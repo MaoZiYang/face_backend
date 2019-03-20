@@ -19,3 +19,11 @@ spring:
     username: root
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+---
+
+#在控制台打印sql语句
+logging:
+  level:
+     com.maohacker.dao: DEBUG
