@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maohacker.dao.roleRankDao">
+    <sql id="startSql">
+		SELECT * FROM (SELECT A.*, ROWNUM RNUM FROM (
+	</sql>
+    <sql id="endSql">
+		) A WHERE ROWNUM &lt;= $page$*$rows$) WHERE RNUM &gt; ($page$-1)*$rows$
+	</sql>
+    <!-- 查询角色信息 -->
+    <select id="qryRankInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        SELECT R.id,
+       R.name,
+       R.status,
+       R.createBy,
+       R.updateBy,
+       R.updateAt,
+       R.createAt
+               from manager_role R
+               where R.rank=#{rank}
+    </select>
+    <!-- 查询权限集信息 -->
+    <select id="qryPermissionsInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        select S.`1`,
+       S.`2`,
+       S.`3`,
+       S.`6`,
+       S.`7`,
+       S.`64`,
+       S.`65`,
+       S.`66`,
+       S.`67`,
+       S.`68`
+       from permissions_set S
+       where S.id=#{rank}
+    </select>
+</mapper>

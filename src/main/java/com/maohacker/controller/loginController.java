@@ -17,7 +17,8 @@ import java.util.Map;
 /**
  * @Author: mzy
  * @Date: 2019-3-20 14:47
- * 调用接口示例:a
+ * 调用接口示例:http://localhost:8080/a/login?name=admin&pwd=123456
+ * 请求方式:POST
  */
 @RestController
 @EnableAutoConfiguration

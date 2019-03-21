@@ -20,6 +20,7 @@ import java.util.Map;
  * @Author: mzy
  * @Date: 2019-3-18 15:42
  * 调用接口示例:http://localhost:8080/testboot/1.json?id=1
+ * 请求方式:POST
  */
 @RestController
 @EnableAutoConfiguration
