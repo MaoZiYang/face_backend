@@ -1,5 +1,6 @@
 package com.maohacker.controller;
 
+import com.maohacker.service.loginService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -8,43 +9,56 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.maohacker.service.testService;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * @Author: mzy
- * @Date: 2019-3-18 15:42
- * 调用接口示例:http://localhost:8080/testboot/1.json?id=1
+ * @Date: 2019-3-20 14:47
+ * 调用接口示例:http://localhost:8080/a/login?name=admin&pwd=123456
  */
 @RestController
 @EnableAutoConfiguration
-@RequestMapping("/testboot")
-public class testController {
-    private static Logger logger=Logger.getLogger(testController.class);  //在类的成员变量处声明
+@RequestMapping("/a")
+public class loginController {
+    private static Logger logger=Logger.getLogger(loginController.class);  //在类的成员变量处声明
     @Autowired//自动把bean里面引用的对象的setter/getter方法省略
-    @Qualifier("testService")//进行自动注入
-    private testService testService;
+    @Qualifier("loginService")//进行自动注入
+    private loginService loginService;
     @SuppressWarnings("all")
-    @RequestMapping(value = "/1.json", method = RequestMethod.POST)
-    public Map<String, Object> Info(HttpServletRequest request,
-                                                HttpServletResponse response){
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public Map<String, Object> Info(HttpServletRequest request,HttpServletResponse response){
+        int CODE=-1;
+        String message = null;
         Map<String,Object> reMap = new HashMap<String, Object>();
         try{
             Map param = this.buildParameter(request);
-            List data = testService.testInfo(param);
+            CODE = loginService.qryloginManagerCode(param);
+            if(CODE == 0){//假如,没有在管理表找到信息,在到教师表找
+                message = "success";
+            }else if(CODE == 1){
+                CODE = loginService.qryloginTeacherCode(param);
+                if(CODE == 2){
+                    message = "success";
+                }else if(CODE == -5004){
+                    message = "用户名或密码错误!";
+                }
+            }
+            Map data = loginService.qryloginData(param);
+            Map manager = loginService.qryloginManager(param);
+            Map role = loginService.qryloginRole(param);
+            data.put("manager", manager);
+            data.put("role", role);
+            reMap.put("code", CODE);
+            reMap.put("message", message);
             reMap.put("data", data);
-            reMap.put("resultFlag", "T");
         }catch(Exception e){
             logger.error("错误信息:"+e.getMessage());
             reMap.put("total", 0);
-            reMap.put("rows", null);
             reMap.put("resultMsg", e.getMessage());
-            reMap.put("resultFlag", "F");
+            reMap.put("resultFlag", "发生错误!");
         }
         return reMap;
     }
@@ -64,4 +78,5 @@ public class testController {
         }
         return parameter;
     }
+
 }

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maohacker.dao.loginDao">
+    <sql id="startSql">
+		SELECT * FROM (SELECT A.*, ROWNUM RNUM FROM (
+	</sql>
+    <sql id="endSql">
+		) A WHERE ROWNUM &lt;= $page$*$rows$) WHERE RNUM &gt; ($page$-1)*$rows$
+	</sql>
+    <!-- 查询登录,判断是否是管理员登录 -->
+    <select id="qryloginManagerCode" parameterType="java.util.HashMap" resultType="int">
+        SELECT IFNULL((SELECT IF(M.id is not null, 0, 2)
+               FROM manager_info M
+               where M.name =#{name} and M.password=#{pwd}),1)AS code;
+    </select>
+
+    <!-- 查询登录,判断是否是教师登录 -->
+    <select id="qryloginTeacherCode" parameterType="java.util.HashMap" resultType="int">
+        SELECT IFNULL((SELECT IF(T.id is not null, 2, 3)
+               FROM teacher_info T
+               where T.name =#{name} and T.password=#{pwd}),-5004)AS code;
+    </select>
+
+    <!-- 查询登录的页面数据 -->
+    <select id="qryloginData" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+         SELECT IFNULL((SELECT M.result
+               FROM login_data M
+               where M.name =#{name}),'')AS code,
+        IFNULL((SELECT M.size
+               FROM login_data M
+               where M.name =#{name} ),'')AS size,
+        IFNULL((SELECT M.total
+               FROM login_data M
+               where M.name =#{name}),'')AS total
+    </select>
+
+
+    <!-- 查询登录的用户信息 -->
+    <select id="qryloginManager" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        SELECT IFNULL((SELECT M.id
+               from manager_info M
+               where name =#{name}
+                 and password =#{pwd}), '') AS id,
+       IFNULL((SELECT M.name
+               from manager_info M
+               where name =#{name}
+                 and password =#{pwd}), '') AS name,
+       IFNULL((SELECT M.nick
+               from manager_info M
+               where name =#{name}
+                 and password =#{pwd}), '') AS nick,
+       IFNULL((SELECT M.status
+               from manager_info M
+               where name =#{name}
+                 and password =#{pwd}), '') AS status,
+       IFNULL((SELECT M.createBy
+               from manager_info M
+               where name =#{name}
+                 and password =#{pwd}), '') AS createBy,
+       IFNULL((SELECT M.updateBy
+               from manager_info M
+               where name =#{name}
+                 and password =#{pwd}), '') AS updateBy,
+       IFNULL((SELECT M.updateAt
+               from manager_info M
+               where name =#{name}
+                 and password =#{pwd}), '') AS updateAt,
+       IFNULL((SELECT M.createAt
+               from manager_info M
+               where name =#{name}
+                 and password =#{pwd}), '') AS createAt
+    </select>
+
+
+    <!-- 查询登录的角色信息 -->
+    <select id="qryloginRole" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        SELECT IFNULL((SELECT R.id
+               from manager_role R,manager_info I
+               where I.name=#{name} and I.password=#{pwd} and I.power=R.rank), '') AS id,
+       IFNULL((SELECT R.name
+               from manager_role R,manager_info I
+               where I.name=#{name} and I.password=#{pwd} and I.power=R.rank), '') AS name,
+       IFNULL((SELECT R.status
+               from manager_role R,manager_info I
+               where I.name=#{name} and I.password=#{pwd} and I.power=R.rank), '') AS status,
+       IFNULL((SELECT R.createBy
+               from manager_role R,manager_info I
+               where I.name=#{name} and I.password=#{pwd} and I.power=R.rank), '') AS createBy,
+       IFNULL((SELECT R.updateBy
+               from manager_role R,manager_info I
+               where I.name=#{name} and I.password=#{pwd} and I.power=R.rank), '') AS updateBy,
+       IFNULL((SELECT R.updateAt
+               from manager_role R,manager_info I
+               where I.name=#{name} and I.password=#{pwd} and I.power=R.rank), '') AS updateAt,
+       IFNULL((SELECT R.createAt
+               from manager_role R,manager_info I
+               where I.name=#{name} and I.password=#{pwd} and I.power=R.rank), '') AS createAt
+    </select>
+</mapper>

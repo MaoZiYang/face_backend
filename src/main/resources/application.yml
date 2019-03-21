@@ -27,3 +27,4 @@ spring:
 logging:
   level:
      com.maohacker.dao: DEBUG
+     mapper: DEBUG

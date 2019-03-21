@@ -7,7 +7,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-//@MapperScan("com.maohacker.dao")//扫描dao层接口
+@MapperScan("com.maohacker.dao")//扫描dao层接口
 public class FaceBackendApplication {
 
     public static void main(String[] args) {
