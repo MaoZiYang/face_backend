@@ -36,7 +36,7 @@ public class LogAspect {
     @AfterReturning(returning = "ret", pointcut = "webLog()")
     public void doAfterReturning(Object ret) throws Throwable {
         // 处理完请求，返回内容
-        System.out.println("方法的返回值 : " + ret);
+        System.out.println("方法-------------返回值 :" + ret);
     }
 
     //后置异常通知

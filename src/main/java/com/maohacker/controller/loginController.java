@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * @Author: mzy
  * @Date: 2019-3-20 14:47
- * 调用接口示例:http://localhost:8080/a/login?name=admin&pwd=123456
+ * 调用接口示例:a
  */
 @RestController
 @EnableAutoConfiguration
@@ -29,7 +29,7 @@ public class loginController {
     private loginService loginService;
     @SuppressWarnings("all")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Map<String, Object> Info(HttpServletRequest request,HttpServletResponse response){
+    public Map<String, Object> loginInfo(HttpServletRequest request,HttpServletResponse response){
         int CODE=-1;
         String message = null;
         Map<String,Object> reMap = new HashMap<String, Object>();
@@ -62,6 +62,25 @@ public class loginController {
         }
         return reMap;
     }
+
+    //退出登录
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public Map<String, Object> logoutInfo(HttpServletResponse response){
+        String message = null;
+        Map<String,Object> reMap = new HashMap<String, Object>();
+        try{
+            reMap.put("code", 0);
+            reMap.put("message", "success");
+        }catch(Exception e){
+            logger.error("错误信息:"+e.getMessage());
+            reMap.put("total", 0);
+            reMap.put("resultMsg", e.getMessage());
+            reMap.put("resultFlag", "发生错误!");
+        }
+        return reMap;
+    }
+
+
 
     /**
      * 内部方法：获取前台参数

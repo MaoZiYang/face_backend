@@ -19,12 +19,12 @@ public class loginService {
     @Qualifier("loginDao")
     private loginDao loginDao;
     @SuppressWarnings("all")
-    //查询Manager表的Code值
+    //查询Manager表的Code值,用于登录
     public int qryloginManagerCode(Map param) throws Exception {
         int result =  loginDao.qryloginManagerCode(param);
         return result;
     }
-    //查询Teacher表的Code值
+    //查询Teacher表的Code值,用于登录
     public int qryloginTeacherCode(Map param) throws Exception {
         int result =  loginDao.qryloginTeacherCode(param);
         return result;

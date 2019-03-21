@@ -24,77 +24,38 @@
 
     <!-- 查询登录的页面数据 -->
     <select id="qryloginData" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-         SELECT IFNULL((SELECT M.result
+         SELECT M.result,M.size,M.total
                FROM login_data M
-               where M.name =#{name}),'')AS code,
-        IFNULL((SELECT M.size
-               FROM login_data M
-               where M.name =#{name} ),'')AS size,
-        IFNULL((SELECT M.total
-               FROM login_data M
-               where M.name =#{name}),'')AS total
+               where M.name =#{name}
     </select>
 
 
     <!-- 查询登录的用户信息 -->
     <select id="qryloginManager" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-        SELECT IFNULL((SELECT M.id
+        SELECT M.id,
+       M.name,
+       M.nick,
+       M.status,
+       M.createBy,
+       M.updateBy,
+       M.updateAt,
+       M.createAt
                from manager_info M
                where name =#{name}
-                 and password =#{pwd}), '') AS id,
-       IFNULL((SELECT M.name
-               from manager_info M
-               where name =#{name}
-                 and password =#{pwd}), '') AS name,
-       IFNULL((SELECT M.nick
-               from manager_info M
-               where name =#{name}
-                 and password =#{pwd}), '') AS nick,
-       IFNULL((SELECT M.status
-               from manager_info M
-               where name =#{name}
-                 and password =#{pwd}), '') AS status,
-       IFNULL((SELECT M.createBy
-               from manager_info M
-               where name =#{name}
-                 and password =#{pwd}), '') AS createBy,
-       IFNULL((SELECT M.updateBy
-               from manager_info M
-               where name =#{name}
-                 and password =#{pwd}), '') AS updateBy,
-       IFNULL((SELECT M.updateAt
-               from manager_info M
-               where name =#{name}
-                 and password =#{pwd}), '') AS updateAt,
-       IFNULL((SELECT M.createAt
-               from manager_info M
-               where name =#{name}
-                 and password =#{pwd}), '') AS createAt
+                 and password =#{pwd}
     </select>
 
 
     <!-- 查询登录的角色信息 -->
     <select id="qryloginRole" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-        SELECT IFNULL((SELECT R.id
+        SELECT R.id,
+       R.name,
+       R.status,
+       R.createBy,
+       R.updateBy,
+       R.updateAt,
+       R.createAt
                from manager_role R,manager_info I
-               where I.name=#{name} and I.password=#{pwd} and I.power=R.rank), '') AS id,
-       IFNULL((SELECT R.name
-               from manager_role R,manager_info I
-               where I.name=#{name} and I.password=#{pwd} and I.power=R.rank), '') AS name,
-       IFNULL((SELECT R.status
-               from manager_role R,manager_info I
-               where I.name=#{name} and I.password=#{pwd} and I.power=R.rank), '') AS status,
-       IFNULL((SELECT R.createBy
-               from manager_role R,manager_info I
-               where I.name=#{name} and I.password=#{pwd} and I.power=R.rank), '') AS createBy,
-       IFNULL((SELECT R.updateBy
-               from manager_role R,manager_info I
-               where I.name=#{name} and I.password=#{pwd} and I.power=R.rank), '') AS updateBy,
-       IFNULL((SELECT R.updateAt
-               from manager_role R,manager_info I
-               where I.name=#{name} and I.password=#{pwd} and I.power=R.rank), '') AS updateAt,
-       IFNULL((SELECT R.createAt
-               from manager_role R,manager_info I
-               where I.name=#{name} and I.password=#{pwd} and I.power=R.rank), '') AS createAt
+               where I.name=#{name} and I.password=#{pwd} and I.power=R.rank
     </select>
 </mapper>
