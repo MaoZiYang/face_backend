@@ -20,19 +20,4 @@
                from manager_role R
                where R.rank=#{rank}
     </select>
-    <!-- 查询权限集信息 -->
-    <select id="qryPermissionsInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-        select S.`1`,
-       S.`2`,
-       S.`3`,
-       S.`6`,
-       S.`7`,
-       S.`64`,
-       S.`65`,
-       S.`66`,
-       S.`67`,
-       S.`68`
-       from permissions_set S
-       where S.id=#{rank}
-    </select>
 </mapper>

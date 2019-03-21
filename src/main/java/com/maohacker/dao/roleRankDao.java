@@ -11,5 +11,4 @@ import java.util.Map;
 @Mapper
 public interface roleRankDao {
     Map qryRankInfo(Map param)throws Exception;
-    Map qryPermissionsInfo(Map param)throws Exception;
 }

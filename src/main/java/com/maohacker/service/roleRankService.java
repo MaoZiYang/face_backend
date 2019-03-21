@@ -20,9 +20,4 @@ public class roleRankService {
         Map result =  roleRankDao.qryRankInfo(param);
         return result;
     }
-
-    public Map PermissionsInfo(Map param) throws Exception {
-        Map result =  roleRankDao.qryPermissionsInfo(param);
-        return result;
-    }
 }

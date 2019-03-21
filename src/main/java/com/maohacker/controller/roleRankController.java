@@ -1,5 +1,7 @@
 package com.maohacker.controller;
 
+import com.maohacker.common.permissionsSet;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -37,8 +39,9 @@ public class roleRankController {
         try{
             rankID.put("rank",1);
             Map role = roleRankService.qryRankInfo(rankID);
-            Map permissionsSet= roleRankService.PermissionsInfo(rankID);
-            role.put("permissionsSet",permissionsSet);
+            Map permissionsSet1=permissionsSet.rank_Map1();
+//            Map permissionsSet= roleRankService.PermissionsInfo(rankID);
+            role.put("permissionsSet",permissionsSet1);
             data.put("rid",1);
             data.put("role",role);
             reMap.put("data", data);
