@@ -20,4 +20,11 @@
                from manager_role R
                where R.rank=#{rank}
     </select>
+
+    <!-- 查询菜单栏列表信息 -->
+    <select id="qrymoduleListInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        select *
+        from modulelist
+        where id =#{ids}
+    </select>
 </mapper>

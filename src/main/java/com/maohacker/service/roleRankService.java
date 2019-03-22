@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,6 +19,12 @@ public class roleRankService {
     @SuppressWarnings("all")
     public Map qryRankInfo(Map param) throws Exception {
         Map result =  roleRankDao.qryRankInfo(param);
+        return result;
+    }
+
+    @SuppressWarnings("all")
+    public Map qrymoduleListInfo(Map param) throws Exception {
+        Map result =  roleRankDao.qrymoduleListInfo(param);
         return result;
     }
 }
