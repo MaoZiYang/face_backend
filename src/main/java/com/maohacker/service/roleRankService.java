@@ -27,4 +27,14 @@ public class roleRankService {
         Map result =  roleRankDao.qrymoduleListInfo(param);
         return result;
     }
+
+    @SuppressWarnings("all")
+    public void upManagerPwdInfo(Map param) throws Exception {
+        roleRankDao.upManagerPwdInfo(param);
+    }
+
+    @SuppressWarnings("all")
+    public void upTeacherPwdInfo(Map param) throws Exception {
+        roleRankDao.upTeacherPwdInfo(param);
+    }
 }

@@ -11,6 +11,8 @@ import java.util.Map;
  */
 @Mapper
 public interface roleRankDao {
-    Map qryRankInfo(Map param)throws Exception;
-    Map qrymoduleListInfo(Map param)throws Exception;
+    Map qryRankInfo(Map param);
+    Map qrymoduleListInfo(Map param);
+    void upManagerPwdInfo(Map param);
+    void upTeacherPwdInfo(Map param);
 }

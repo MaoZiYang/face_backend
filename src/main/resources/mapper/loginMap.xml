@@ -17,7 +17,7 @@
 
     <!-- 查询登录,判断是否是教师登录 -->
     <select id="qryloginTeacherCode" parameterType="java.util.HashMap" resultType="int">
-        SELECT IFNULL((SELECT IF(T.id is not null, 2, 3)
+        SELECT IFNULL((SELECT IF(T.id is not null, 0, 3)
                FROM teacher_info T
                where T.name =#{name} and T.password=#{pwd}),-5004)AS code;
     </select>

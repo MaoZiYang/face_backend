@@ -41,7 +41,7 @@ public class loginController {
                 message = "success";
             }else if(CODE == 1){
                 CODE = loginService.qryloginTeacherCode(param);
-                if(CODE == 2){
+                if(CODE == 0){
                     message = "success";
                 }else if(CODE == -5004){
                     message = "用户名或密码错误!";

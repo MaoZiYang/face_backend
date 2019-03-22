@@ -27,4 +27,18 @@
         from modulelist
         where id =#{ids}
     </select>
+
+    <!-- 更新管理员表信息 -->
+    <update id="upManagerPwdInfo" parameterType="java.util.HashMap">
+        update manager_info
+        set password = #{newPwd}
+        where name = #{name}  and  password = #{pwd}
+    </update>
+
+    <!-- 更新教师表信息 -->
+    <update id="upTeacherPwdInfo" parameterType="java.util.HashMap">
+        update teacher_info
+        set password = #{newPwd}
+        where name = #{name}  and  password = #{pwd}
+    </update>
 </mapper>
