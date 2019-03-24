@@ -15,7 +15,7 @@ public class testService {
     @Qualifier("testDao")
     private testDao testDao;
     @SuppressWarnings("all")
-    public List<Map> testInfo(Map param) throws Exception {
+    public List<Map> testInfo(Map param)  {
         Map a=param;
         List<Map> result =  testDao.selectPerson(param);
         return result;

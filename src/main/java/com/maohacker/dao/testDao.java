@@ -10,7 +10,7 @@ import java.util.Map;
  */
 @Mapper
 public interface  testDao{
-    List<Map> selectPerson(Map param)throws Exception;
+    List<Map> selectPerson(Map param);
 }
 
 

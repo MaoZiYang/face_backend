@@ -37,7 +37,7 @@ public class loginController {
         try{
             Map param = this.buildParameter(request);
             CODE = loginService.qryloginManagerCode(param);
-            if(CODE == 0){//假如,没有在管理表找到信息,在到教师表找
+            if(CODE == 0){//假如,没有在用户表找到信息,在到教师表找
                 message = "success";
             }else if(CODE == 1){
                 CODE = loginService.qryloginTeacherCode(param);

@@ -20,31 +20,31 @@ public class loginService {
     private loginDao loginDao;
     @SuppressWarnings("all")
     //查询Manager表的Code值,用于登录
-    public int qryloginManagerCode(Map param) throws Exception {
+    public int qryloginManagerCode(Map param){
         int result =  loginDao.qryloginManagerCode(param);
         return result;
     }
     //查询Teacher表的Code值,用于登录
-    public int qryloginTeacherCode(Map param) throws Exception {
+    public int qryloginTeacherCode(Map param){
         int result =  loginDao.qryloginTeacherCode(param);
         return result;
     }
 
     //查询登录的页面数据
-    public Map qryloginData(Map param) throws Exception {
+    public Map qryloginData(Map param){
         Map result =  loginDao.qryloginData(param);
         return result;
     }
 
     //查询登录的用户信息
-    public Map qryloginManager(Map param) throws Exception {
+    public Map qryloginManager(Map param){
         Map result =  loginDao.qryloginManager(param);
         return result;
     }
 
 
     //查询登录的角色信息
-    public Map qryloginRole(Map param) throws Exception {
+    public Map qryloginRole(Map param){
         Map result =  loginDao.qryloginRole(param);
         return result;
     }
