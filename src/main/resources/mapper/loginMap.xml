@@ -56,6 +56,6 @@
        R.updateAt,
        R.createAt
                from manager_role R,manager_info I
-               where I.name=#{name} and I.password=#{pwd} and I.power=R.rank
+               where I.name=#{name} and I.password=#{pwd} and I.roleID=R.id
     </select>
 </mapper>
