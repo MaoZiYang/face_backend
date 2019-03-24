@@ -15,4 +15,7 @@ public interface roleRankDao {
     Map qrymoduleListInfo(Map param);
     void upManagerPwdInfo(Map param);
     void upTeacherPwdInfo(Map param);
+    List<Map> qryModuleManagr(Map param);
+    int qryModuleManagrTotal(Map param);
+    void insertModuleManagr(Map param);
 }

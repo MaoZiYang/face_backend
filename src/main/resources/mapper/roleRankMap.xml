@@ -41,4 +41,24 @@
         set password = #{newPwd}
         where name = #{name}  and  password = #{pwd}
     </update>
+
+    <!-- 查询模块管理列表信息 -->
+    <select id="qryModuleManagr" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        select id
+        from modulelist
+        order by id
+        limit #{start},#{end};
+    </select>
+
+    <!-- 查询模块管理列表总数 -->
+    <select id="qryModuleManagrTotal" parameterType="java.util.HashMap" resultType="int">
+        select count(id) AS total
+        from modulelist
+    </select>
+
+    <!-- 新增模块管理 -->
+    <insert id="insertModuleManagr" parameterType="java.util.HashMap">
+        insert into modulelist (name, menuID, url, parentID, type, level)
+        values (#{name},#{menuID},#{url},#{parentID},#{type},#{level});
+    </insert>
 </mapper>
