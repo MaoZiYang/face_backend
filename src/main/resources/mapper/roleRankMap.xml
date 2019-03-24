@@ -18,7 +18,7 @@
        R.updateAt,
        R.createAt
                from manager_role R
-               where R.rank=#{rank}
+               where R.id=#{id}
     </select>
 
     <!-- 查询菜单栏列表信息 -->
@@ -61,4 +61,54 @@
         insert into modulelist (name, menuID, url, parentID, type, level)
         values (#{name},#{menuID},#{url},#{parentID},#{type},#{level});
     </insert>
+
+    <!-- 查询用户列表id -->
+    <select id="qryManagr" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        select id
+        from manager_info
+        order by id
+        limit #{start},#{end};
+    </select>
+
+    <!-- 查询用户总数 -->
+    <select id="qryManagrTotal" parameterType="java.util.HashMap" resultType="int">
+        select count(id) AS total
+        from manager_info
+    </select>
+
+    <!-- 查询管理员列表信息 -->
+    <select id="roleInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        select R.id, R.name, R.status, R.createBy, R.updateBy, R.updateAt, R.createAt
+        from manager_role R
+        where id =#{ids}
+    </select>
+
+    <!-- 查询菜单栏列表信息 -->
+    <select id="qryManagerListInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        select R.id,
+       R.name,
+       R.nick,
+       R.roleID,
+       R.status,
+       R.createBy,
+       R.updateBy,
+       R.updateAt,
+       R.createAt
+       from manager_info R
+       where id =#{ids}
+    </select>
+
+    <!-- 查询用户列表id -->
+    <select id="qryRole" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        select id
+        from manager_role
+        order by id
+        limit #{start},#{end};
+    </select>
+
+    <!-- 查询用户总数 -->
+    <select id="qryRoleTotal" parameterType="java.util.HashMap" resultType="int">
+        select count(id) AS total
+        from manager_role
+    </select>
 </mapper>

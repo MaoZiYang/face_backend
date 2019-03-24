@@ -18,4 +18,10 @@ public interface roleRankDao {
     List<Map> qryModuleManagr(Map param);
     int qryModuleManagrTotal(Map param);
     void insertModuleManagr(Map param);
+    List<Map> qryManagr(Map param);
+    int qryManagrTotal(Map param);
+    Map roleInfo(Map param);
+    Map qryManagerListInfo(Map param);
+    List<Map> qryRole(Map param);
+    int qryRoleTotal(Map param);
 }

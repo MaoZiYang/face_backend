@@ -54,4 +54,40 @@ public class roleRankService {
     public void insertModuleManagr(Map param) throws Exception {
         roleRankDao.insertModuleManagr(param);
     }
+
+    @SuppressWarnings("all")
+    public List qryManagr(Map param) throws Exception {
+        List result = roleRankDao.qryManagr(param);
+        return result;
+    }
+
+    @SuppressWarnings("all")
+    public int qryManagrTotal(Map param) throws Exception {
+        int result = roleRankDao.qryManagrTotal(param);
+        return result;
+    }
+
+    @SuppressWarnings("all")
+    public Map roleInfo(Map param) throws Exception {
+        Map result =  roleRankDao.roleInfo(param);
+        return result;
+    }
+
+    @SuppressWarnings("all")
+    public Map qryManagerListInfo(Map param) throws Exception {
+        Map result =  roleRankDao.qryManagerListInfo(param);
+        return result;
+    }
+
+    @SuppressWarnings("all")
+    public List qryRole(Map param) throws Exception {
+        List result = roleRankDao.qryRole(param);
+        return result;
+    }
+
+    @SuppressWarnings("all")
+    public int qryRoleTotal(Map param) throws Exception {
+        int result = roleRankDao.qryRoleTotal(param);
+        return result;
+    }
 }

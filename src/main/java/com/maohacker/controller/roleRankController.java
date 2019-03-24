@@ -49,7 +49,7 @@ public class roleRankController {
             Map<String,Object> data = new HashMap<String, Object>();
             Map<String,Object> rankID = new HashMap<String, Object>();
             try{
-                rankID.put("rank",1);
+                rankID.put("id",1);
                 Map role = roleRankService.qryRankInfo(rankID);
                 Map permissionsSet1=permissionsSet.rank_Map1();
                 role.put("permissionsSet",permissionsSet1);
@@ -272,6 +272,183 @@ public class roleRankController {
         return reMap;
     }
 
+    /**
+     * 返回用户id和总数--接口
+     * 调用接口示例:http://localhost:8080/a/u/manager/?page=1&size=10
+     * 请求方式:GET
+     * @param response
+     * @return Map
+     */
+    @SuppressWarnings("all")
+    @RequestMapping(value = "/manager/", method = RequestMethod.GET)
+    public Map<String, Object> qryManagrInfo(HttpServletRequest request,HttpServletResponse response){
+        int CODE=-1;
+        String message = null;
+        Map<String,Object> reMap = new HashMap<String, Object>();
+        Map<String,Object> data = new HashMap<String, Object>();
+        Map<String,Object> param = new HashMap<String, Object>();
+        try{
+            int page = Integer.parseInt(request.getParameterValues("page")[0]);
+            int size = Integer.parseInt(request.getParameterValues("size")[0]);
+            param.put("start", (page-1)*size);
+            param.put("end", (page-1)*size+size);
+            int total = roleRankService.qryManagrTotal(param);
+            List ORDER_NUM = roleRankService.qryManagr(param);
+            int ids[] = new int[ORDER_NUM.size()];//定义一个数组用于响应前端的模块管理请求
+            for(int i = 0;i<ORDER_NUM.size();i++){//将List<Map>中的每个value值取出来
+                Map map = (Map)ORDER_NUM.get(i);
+                int str = (int)map.get("id");
+                ids[i]=str;
+            }
+            if(page*size<total){
+                data.put("next",true);
+            }else {
+                data.put("next",false);
+            }
+            data.put("page", page);
+            data.put("size", size);
+            data.put("total",total);
+            data.put("ids", ids);
+            reMap.put("data", data);
+            reMap.put("code", 0);
+            reMap.put("message", "success");
+        }catch(Exception e){
+            logger.error("错误信息:"+e.getMessage());
+            reMap.put("total", 0);
+            reMap.put("resultMsg", e.getMessage());
+            reMap.put("resultFlag", "发生错误!");
+        }
+        return reMap;
+    }
+
+    /**
+     * 查询用户角色-请求接口
+     * 调用接口示例:http://localhost:8080/a/u/role/?page=1&size=65535
+     * 请求方式:GET
+     * @param response
+     * @return Map
+     */
+    @SuppressWarnings("all")
+    @RequestMapping(value = "/role/", method = RequestMethod.GET)
+    public Map<String, Object> qryroleInfo(HttpServletRequest request,HttpServletResponse response){
+        int CODE=-1;
+        String message = null;
+        Map<String,Object> reMap = new HashMap<String, Object>();
+        Map<String,Object> data = new HashMap<String, Object>();
+        Map<String,Object> param = new HashMap<String, Object>();
+        try{
+            int page = Integer.parseInt(request.getParameterValues("page")[0]);
+            int size = Integer.parseInt(request.getParameterValues("size")[0]);
+            param.put("start", (page-1)*size);
+            param.put("end", (page-1)*size+size);
+            int total = roleRankService.qryRoleTotal(param);
+            List ORDER_NUM = roleRankService.qryRole(param);
+            int ids[] = new int[ORDER_NUM.size()];//定义一个数组用于响应前端的模块管理请求
+            for(int i = 0;i<ORDER_NUM.size();i++){//将List<Map>中的每个value值取出来
+                Map map = (Map)ORDER_NUM.get(i);
+                int str = (int)map.get("id");
+                ids[i]=str;
+            }
+            if(page*size<total){
+                data.put("next",true);
+            }else {
+                data.put("next",false);
+            }
+            data.put("page", page);
+            data.put("size", size);
+            data.put("total",total);
+            data.put("ids", ids);
+            reMap.put("data", data);
+            reMap.put("code", 0);
+            reMap.put("message", "success");
+        }catch(Exception e){
+            logger.error("错误信息:"+e.getMessage());
+            reMap.put("total", 0);
+            reMap.put("resultMsg", e.getMessage());
+            reMap.put("resultFlag", "发生错误!");
+        }
+        return reMap;
+    }
+
+    /**
+     * 返回相关用户的菜单列表内容接口
+     * 调用接口示例:http://localhost:8080/a/u/multi/role?ids=1&ids=2&ids=3&ids=4&ids=10&ids=11&ids=12&ids=13
+     * 请求方式:GET
+     * @param response
+     * @return Map
+     */
+    @SuppressWarnings("all")
+    @RequestMapping(value = "/multi/role", method = RequestMethod.GET)
+    public Map<String, Object> roleInfo(HttpServletRequest request,
+                                              HttpServletResponse response){
+        Map<String,Object> reMap = new HashMap<String, Object>();
+        Map<String,Object> data = new HashMap<String, Object>();
+        Map<String,Object> param = new HashMap<String, Object>();
+//        Map<String,Object> permissionsSet = new HashMap<String, Object>();
+        List<Map<String, Object>> listroleList = new ArrayList<Map<String, Object>>();
+        try {
+            int total = request.getParameterValues("ids").length;
+            for (int i = 0; i < total; i++) {
+                param.put("ids", request.getParameterValues("ids")[i]);
+                Map roleList = roleRankService.roleInfo(param);
+                roleList.put("permissionsSet",null);
+                listroleList.add(roleList);
+            }
+            data.put("roleList", listroleList);
+            data.put("total", total);
+            data.put("page",null);
+            data.put("size", 10);
+            reMap.put("data", data);
+            reMap.put("code", 0);
+            reMap.put("message", "success");
+        }catch(Exception e){
+            logger.error("错误信息:"+e.getMessage());
+            reMap.put("total", 0);
+            reMap.put("rows", null);
+            reMap.put("resultMsg", e.getMessage());
+            reMap.put("resultFlag", "F");
+        }
+        return reMap;
+    }
+
+    /**
+     * 返回角色列表内容接口
+     * 调用接口示例:http://localhost:8080/a/u/multi/manager?ids=1&ids=2&ids=3&ids=4&ids=10&ids=11&ids=12&ids=13
+     * 请求方式:GET
+     * @param response
+     * @return Map
+     */
+    @SuppressWarnings("all")
+    @RequestMapping(value = "/multi/manager", method = RequestMethod.GET)
+    public Map<String, Object> managerListInfo(HttpServletRequest request,
+                                              HttpServletResponse response){
+        Map<String,Object> reMap = new HashMap<String, Object>();
+        Map<String,Object> data = new HashMap<String, Object>();
+        Map<String,Object> param = new HashMap<String, Object>();
+        List<Map<String, Object>> listManagerList = new ArrayList<Map<String, Object>>();
+        try {
+            int total = request.getParameterValues("ids").length;
+            for (int i = 0; i < total; i++) {
+                param.put("ids", request.getParameterValues("ids")[i]);
+                Map managerList = roleRankService.qryManagerListInfo(param);
+                listManagerList.add(managerList);
+            }
+            data.put("managerList", listManagerList);
+            data.put("total", total);
+            data.put("page",null);
+            data.put("size", null);
+            reMap.put("data", data);
+            reMap.put("code", 0);
+            reMap.put("message", "success");
+        }catch(Exception e){
+            logger.error("错误信息:"+e.getMessage());
+            reMap.put("total", 0);
+            reMap.put("rows", null);
+            reMap.put("resultMsg", e.getMessage());
+            reMap.put("resultFlag", "F");
+        }
+        return reMap;
+    }
 
 
 
