@@ -13,6 +13,7 @@ public class permissionsSet {
         Map<String,Object> Map1 = new HashMap<String, Object>();
         Map1.put("1", new String[]{});//一级菜单
         Map1.put("2", new String[]{"create","update","delete","sort"});
+        Map1.put("3", new String[]{"create","update","delete","sort"});
         Map1.put("6", new String[]{"create","update","delete","sort"});
         Map1.put("7", new String[]{"create","update","delete","sort"});
         Map1.put("64", new String[]{});//一级菜单
