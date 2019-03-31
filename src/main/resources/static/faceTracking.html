@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>基于tracking的取人脸</title>
+    <script src="js/jquery-1.7.1.min.js"></script>
+    <script src="js/tracking-min.js"></script>
+    <script src="js/face-min.js"></script>
+    <script src="js/faceTracking.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        video, #canvas,#canvas1 {
+            position: absolute;
+            width: 581px;
+            height: 436px;
+        }
+
+        #canvas1 {
+            position: absolute;
+        }
+
+        .container {
+            position: relative;
+            width: 581px;
+            height: 436px;
+        }
+        #keepImg{
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            display: inline-block;
+            float: left;
+        }
+        #btn{
+            width: 100px;
+            height: 100px;
+            background-color: deeppink;
+            display: inline-block;
+            float: left;
+        }
+        #img{
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<h1>请将脸放到方框中</h1>
+<h6>经测试该demo可以适用于大部分最新浏览器，ie暂不支持。</h6>
+<p>下方两个按钮为手动模式，可手动保存图片</p>
+<div class="container">
+    <video id="video" preload autoplay loop muted></video>
+    <canvas id="canvas" width="581" height="436"></canvas>
+    <canvas id="canvas1" width="581" height="436"></canvas>
+</div>
+<div id="keepImg">保存图片</div>
+<div id="btn">截图</div>
+<canvas id="shortCut" width="140" height="140"></canvas>
+<div id="img"></div>
+</body>
+</html>
