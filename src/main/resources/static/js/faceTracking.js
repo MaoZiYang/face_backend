@@ -44,16 +44,16 @@ window.onload = function () {
     function getPhoto() {
         context2.drawImage(video, 210, 130, 210, 210, 0, 0, 140, 140); //将video对象内指定的区域捕捉绘制到画布上指定的区域，实现拍照。
     }
-    var canvas1 = document.getElementById('canvas1');
-    var context1 = canvas1.getContext('2d');
+    // var canvas1 = document.getElementById('canvas1');
+    // var context1 = canvas1.getContext('2d');
     var context2 = can.getContext('2d');
-    context1.strokeStyle = "#69fff1";
+/*    context1.strokeStyle = "#69fff1";
     context1.moveTo(190, 118);
     context1.lineTo(390, 118);
     context1.lineTo(390, 318);
     context1.lineTo(190, 318);
     context1.lineTo(190, 118);
-    context1.stroke();
+    context1.stroke();*/
 
 
     //将canvas转化为图片
