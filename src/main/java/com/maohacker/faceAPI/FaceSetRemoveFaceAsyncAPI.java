@@ -2,6 +2,7 @@ package com.maohacker.faceAPI;
 
 import com.maohacker.common.sameAPI;
 
+import java.io.File;
 import java.util.HashMap;
 
 /**

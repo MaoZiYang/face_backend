@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maohacker.dao.faceTrackingDao">
+    <sql id="startSql">
+		SELECT * FROM (SELECT A.*, ROWNUM RNUM FROM (
+	</sql>
+    <sql id="endSql">
+		) A WHERE ROWNUM &lt;= $page$*$rows$) WHERE RNUM &gt; ($page$-1)*$rows$
+	</sql>
+    <!-- 查询学生人脸签到的名单信息 -->
+    <select id="qryStudentSignInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        select S.name
+        from student_info S
+        where S.face_token =#{face_token}
+    </select>
+</mapper>

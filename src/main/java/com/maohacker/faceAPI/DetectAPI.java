@@ -12,10 +12,8 @@ import java.util.HashMap;
  */
 public class DetectAPI {
     public static void main(String[] args) throws Exception{
-
-        File file = new File("C:\\Users\\hasee\\Desktop\\faceHouse\\101.JPG");
+        File file = new File("C:\\Users\\hasee\\Desktop\\faceHouse\\111.JPG");
         byte[] buff = sameAPI.getBytesFromFile(file);
-        System.out.println("buff-------------"+buff);
         String url = "https://api-cn.faceplusplus.com/facepp/v3/detect";
         HashMap<String, String> map = new HashMap<>();
         HashMap<String, byte[]> byteMap = new HashMap<>();
@@ -27,7 +25,7 @@ public class DetectAPI {
         try{
             byte[] bacd = sameAPI.post(url, map, byteMap);
             String str = new String(bacd);
-            System.out.println("str---"+str);
+            System.out.println(str);
         }catch (Exception e) {
             e.printStackTrace();
         }

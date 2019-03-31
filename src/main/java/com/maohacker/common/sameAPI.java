@@ -112,7 +112,6 @@ public class sameAPI {
                 out.write(b, 0, n);
             stream.close();
             out.close();
-            System.out.println("base64===================sameApi"+out.toByteArray());
             return out.toByteArray();
         } catch (IOException e) {
         }

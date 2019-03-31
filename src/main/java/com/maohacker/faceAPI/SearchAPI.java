@@ -25,7 +25,7 @@ public class SearchAPI {
         map.put("api_key", sameAPI.api_key);
         map.put("api_secret", sameAPI.api_secret);
         map.put("display_name", "高校人脸识别学生图库");
-        map.put("outer_id", "facehouse");
+        map.put("outer_id", sameAPI.outer_id);
         byteMap.put("image_file", buff);
         try{
             byte[] bacd = sameAPI.post(url, map, byteMap);
