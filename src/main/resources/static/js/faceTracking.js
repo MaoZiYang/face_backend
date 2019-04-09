@@ -39,8 +39,27 @@ window.onload = function () {
                 delete saveArray[key];
             }
             console.log(convertCanvasToImage(can).src);
+                    $.ajax({
+            url:"/face/faceTracking.json",    //请求的url地址
+            dataType:"json",   //返回格式为json
+            async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+            data:{"base64":convertCanvasToImage(can).src},    //参数值为base64
+            type:"post",   //请求方式
+            beforeSend:function(){
+                //请求前的处理
+            },
+            success:function(result){
+                //请求成功时处理
+            },
+            complete:function(){
+                //请求完成的处理
+            },
+            error:function(){
+                //请求出错处理
+            }
+        });
         }
-    }, 2000);
+    }, 1000);
     function getPhoto() {
         context2.drawImage(video, 210, 130, 210, 210, 0, 0, 140, 140); //将video对象内指定的区域捕捉绘制到画布上指定的区域，实现拍照。
     }
@@ -73,7 +92,6 @@ window.onload = function () {
             },
             success:function(req){
                 //请求成功时处理
-                $.messager.alert("提示","签到成功！","warning");
             },
             complete:function(){
                 //请求完成的处理

@@ -56,7 +56,7 @@ public class faceTrackingController {
         byte[] buff = new byte[0];
         try {
             Map image_base64 = this.buildParameter(request);//获取前台传来的base64格式的图片
-            for (Object key : image_base64.keySet()) {//获取前台传来的map的value,即:base64格式
+            for (Object key : image_base64.keySet()) {//获取前台传来的map的value,即:base6    4格式
                 value = (String) image_base64.get(key);
             }
             String url = "https://api-cn.faceplusplus.com/facepp/v3/search";
