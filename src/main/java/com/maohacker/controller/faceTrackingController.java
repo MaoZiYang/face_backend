@@ -1,6 +1,7 @@
 package com.maohacker.controller;
 
 import com.google.gson.Gson;
+import com.maohacker.common.ParamUtil;
 import com.maohacker.common.sameAPI;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,7 @@ public class faceTrackingController {
         HashMap<String, byte[]> byteMap = new HashMap<>();
         byte[] buff = new byte[0];
         try {
-            Map image_base64 = this.buildParameter(request);//获取前台传来的base64格式的图片
+            Map image_base64 = ParamUtil.buildParameter(request);//获取前台传来的base64格式的图片
             for (Object key : image_base64.keySet()) {//获取前台传来的map的value,即:base6    4格式
                 value = (String) image_base64.get(key);
             }
@@ -94,23 +95,5 @@ public class faceTrackingController {
             reMap.put("resultFlag", "发生错误!");
         }
         return reMap;
-    }
-
-
-    /**
-     * 内部方法：获取前台参数
-     *
-     * @return Map<String,Object>
-     */
-    @SuppressWarnings("all")
-    private Map<String, Object> buildParameter(HttpServletRequest request) {
-        Map<String, Object> parameter = new HashMap<String, Object>();
-        java.util.Enumeration<String> paremEnu = null;
-        paremEnu = request.getParameterNames();
-        while (paremEnu.hasMoreElements()) {
-            String paramName = paremEnu.nextElement();
-            parameter.put(paramName, request.getParameter(paramName));
-        }
-        return parameter;
     }
 }

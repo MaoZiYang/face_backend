@@ -1,5 +1,6 @@
 package com.maohacker.controller;
 
+import com.maohacker.common.ParamUtil;
 import com.maohacker.service.loginService;
 import com.maohacker.common.permissionsSet;
 
@@ -171,7 +172,7 @@ public class roleRankController {
         String message = null;
         Map<String,Object> reMap = new HashMap<String, Object>();
         try {
-            Map param = this.buildParameter(request);
+            Map param = ParamUtil.buildParameter(request);
             CODE = loginService.qryloginManagerCode(param);
             if(CODE == 0){//假如,没有在管理表找到信息,在到教师表找
                  roleRankService.upManagerPwdInfo(param);
@@ -259,7 +260,7 @@ public class roleRankController {
     public Map<String, Object> insertModuleManagrInfo(HttpServletRequest request,HttpServletResponse response){
         Map<String,Object> reMap = new HashMap<String, Object>();
         try{
-            Map param = this.buildParameter(request);
+            Map param = ParamUtil.buildParameter(request);
             roleRankService.insertModuleManagr(param);
             reMap.put("code", 0);
             reMap.put("message", "新增成功!");
@@ -384,7 +385,6 @@ public class roleRankController {
         Map<String,Object> reMap = new HashMap<String, Object>();
         Map<String,Object> data = new HashMap<String, Object>();
         Map<String,Object> param = new HashMap<String, Object>();
-//        Map<String,Object> permissionsSet = new HashMap<String, Object>();
         List<Map<String, Object>> listroleList = new ArrayList<Map<String, Object>>();
         try {
             int total = request.getParameterValues("ids").length;
@@ -450,25 +450,8 @@ public class roleRankController {
         return reMap;
     }
 
-
-
     public roleRankController(loginService loginService) {
             this.loginService = loginService;
     }
 
-    /**
-     * 内部方法：获取前台参数
-     * @return Map<String,Object>
-     */
-    @SuppressWarnings("all")
-    private Map<String,Object> buildParameter(HttpServletRequest request){
-        Map<String, Object> parameter = new HashMap<String, Object>();
-        java.util.Enumeration<String> paremEnu = null;
-        paremEnu = request.getParameterNames();
-        while (paremEnu.hasMoreElements()) {
-            String paramName = paremEnu.nextElement();
-            parameter.put(paramName, request.getParameter(paramName));
-        }
-        return parameter;
-    }
 }

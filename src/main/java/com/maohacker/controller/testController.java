@@ -1,5 +1,6 @@
 package com.maohacker.controller;
 
+import com.maohacker.common.ParamUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,7 +37,7 @@ public class testController {
                                                 HttpServletResponse response){
         Map<String,Object> reMap = new HashMap<String, Object>();
         try{
-            Map param = this.buildParameter(request);
+            Map param = ParamUtil.buildParameter(request);
             List data = testService.testInfo(param);
             reMap.put("data", data);
             reMap.put("resultFlag", "T");
@@ -48,21 +49,5 @@ public class testController {
             reMap.put("resultFlag", "F");
         }
         return reMap;
-    }
-
-    /**
-     * 内部方法：获取前台参数
-     * @return Map<String,Object>z
-     */
-    @SuppressWarnings("all")
-    private Map<String,Object> buildParameter(HttpServletRequest request){
-        Map<String, Object> parameter = new HashMap<String, Object>();
-        java.util.Enumeration<String> paremEnu = null;
-        paremEnu = request.getParameterNames();
-        while (paremEnu.hasMoreElements()) {
-            String paramName = paremEnu.nextElement();
-            parameter.put(paramName, request.getParameter(paramName));
-        }
-        return parameter;
     }
 }

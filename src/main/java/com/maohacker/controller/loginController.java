@@ -1,5 +1,6 @@
 package com.maohacker.controller;
 
+import com.maohacker.common.ParamUtil;
 import com.maohacker.service.loginService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class loginController {
         String message = null;
         Map<String,Object> reMap = new HashMap<String, Object>();
         try{
-            Map param = this.buildParameter(request);
+            Map param = ParamUtil.buildParameter(request);
             CODE = loginService.qryloginManagerCode(param);
             if(CODE == 0){//假如,没有在用户表找到信息,在到教师表找
                 message = "success";
@@ -80,23 +81,4 @@ public class loginController {
         }
         return reMap;
     }
-
-
-
-    /**
-     * 内部方法：获取前台参数
-     * @return Map<String,Object>z
-     */
-    @SuppressWarnings("all")
-    private Map<String,Object> buildParameter(HttpServletRequest request){
-        Map<String, Object> parameter = new HashMap<String, Object>();
-        java.util.Enumeration<String> paremEnu = null;
-        paremEnu = request.getParameterNames();
-        while (paremEnu.hasMoreElements()) {
-            String paramName = paremEnu.nextElement();
-            parameter.put(paramName, request.getParameter(paramName));
-        }
-        return parameter;
-    }
-
 }
