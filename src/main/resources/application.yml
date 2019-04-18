@@ -15,7 +15,7 @@ mybatis:
 
 server:
 #端口号
-  port: 8082
+  port: 8080
 #  session:
 #    timeout: 6000
 
