@@ -16,9 +16,11 @@ import java.util.Arrays;
 @Aspect
 @Component
 public class LogAspect {
+    //Pointcut表示式
     @Pointcut("execution(public * com.maohacker.controller.*.*(..))")
+    //Point签名
     public void webLog(){}
-
+    //指定Pointcut签名
     @Before("webLog()")//前置通知，在切点之前执行；
     public void deBefore(JoinPoint joinPoint) throws Throwable {
         // 接收到请求，记录请求内容
